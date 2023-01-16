@@ -1,0 +1,30 @@
+FROM php:8.1
+USER root
+WORKDIR /application
+RUN curl -sS https://get.symfony.com/cli/installer | bash
+COPY . .
+RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
+
+RUN curl -sS https://getcomposer.org/installer | php
+RUN chmod +x composer.phar
+RUN mv composer.phar /usr/local/bin/composer
+
+#setup debugging
+RUN pecl install xdebug
+RUN docker-php-ext-enable xdebug
+RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+        && echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+        && echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+        && echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+        && echo "xdebug.client_port=9000" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+        && echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+        && echo "xdebug.log=/root/xdebug.log" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+        && echo "xdebug.idekey=PHPSTORM" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+        && echo "xdebug.discover_client_host=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+        && echo "opcache.enable = 0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+RUN composer install
+
+ENV SHELL_VERBOSITY 3
+
+CMD ["symfony", "serve", "--no-tls"]

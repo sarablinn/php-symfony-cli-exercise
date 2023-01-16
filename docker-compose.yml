@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  server:
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
+    container_name: php-cli-exercise
+    volumes:
+      - ".:/application"
+    environment:
+      XDEBUG_CONFIG: "remote_host=host.docker.internal"
+      PHP_IDE_CONFIG: "serverName=php_cli_exercise"
+      LOG_LEVEL: 'debug'
