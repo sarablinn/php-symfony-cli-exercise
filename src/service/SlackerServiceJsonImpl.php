@@ -153,7 +153,6 @@ class SlackerServiceJsonImpl implements SlackerService
                 . '", "username": "' . $user->getDisplayName() . '", '
                 . '"text": "'. $message->getMessage() . '", '
                 . '"icon_emoji": ":' . $icon_emoji_name . ':"}\' '
-                #. 'https://hooks.slack.com/services/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');
                 . getenv('WEBHOOK_BOT'));
         $send_message_process->run();
 
