@@ -12,7 +12,10 @@
         "symfony/console": "^6.2",
         "symfony/finder": "*",
         "symfony/filesystem": "*",
-        "symfony/process": "*"
+        "symfony/process": "*",
+        "symfony/serializer": "^6.2",
+        "symfony/property-access": "^6.2",
+        "phpdocumentor/reflection-docblock": "^5.3"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest"

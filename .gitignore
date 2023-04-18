@@ -53,3 +53,5 @@
 
 .idea
 src/data/*.json
+
+.env.local
