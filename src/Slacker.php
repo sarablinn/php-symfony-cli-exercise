@@ -356,7 +356,7 @@ class Slacker extends Command
         $helper = $this->getHelper('question');
         $update_prompt
                 = new Question("<question>Enter the updated template and "
-                        . "press enter to save: </question>", null);
+                        . "press ENTER to save: </question>", null);
         $update_response = $helper->ask($input, $output, $update_prompt);
 
         if (str_replace(' ', '', $update_response) != '') {
