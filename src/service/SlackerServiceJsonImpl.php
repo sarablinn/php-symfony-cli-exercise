@@ -16,11 +16,7 @@ use DateTime;
 use DateTimeInterface;
 use ErrorException;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
-use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 class SlackerServiceJsonImpl implements SlackerService
 {
