@@ -131,10 +131,10 @@ class Slacker extends Command
         $question = new Question("\n<question>" . $prompt . "</question>", $defaultOption);
 
         $response = $minOption-1;
-        while ($response <= $minOption || $response > $maxOption) {
+        while ($response < $minOption || $response > $maxOption) {
             try {
                 $response = $helper->ask($input, $output, $question);
-                if ($response <= $minOption || $response > $maxOption) {
+                if ($response < $minOption || $response > $maxOption) {
                     throw new Exception();
                 }
             } catch (TypeError | Exception $e) {
@@ -205,14 +205,14 @@ class Slacker extends Command
         $helper = $this->getHelper('question');
         $question = new Question(
             "\n<question>Enter the slack channel name to send message to </question>"
-            . "\n<comment>(Exclude '#'. Leave empty and hit enter to use default): </comment>",
+            . "\n<comment>(Exclude '#'. Leave empty and hit ENTER to use default): </comment>",
             "testing_slackbot");
         $channel_response = $helper->ask($input, $output, $question);
 
         # prompt user to input the desired emoji to use as the icon
         $helper = $this->getHelper('question');
         $question = new Question("\n<question>Enter an emoji name </question>"
-            . "\n<comment>(Exclude ': :'. Leave empty and hit enter to use default): </comment>",
+            . "\n<comment>(Exclude ': :'. Leave empty and hit ENTER to use default): </comment>",
             "ghost");
         $emoji_response = $helper->ask($input, $output, $question);
 
